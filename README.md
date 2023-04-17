@@ -17,4 +17,4 @@ Made with Laravel Sanctum and Fortify for quick start on you laravel backend pro
 
 ## Screenshots
 
-![App Screenshot](https://github.com/reancirl/Laravel-Auth-API/public/images/postman-resources.png)
+![App Screenshot](https://github.com/reancirl/Laravel-Auth-API/blob/main/public/images/postman-resources.png)
