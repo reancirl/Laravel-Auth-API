@@ -2,6 +2,7 @@
 # Laravel Authentication API
 
 Made with Laravel Sanctum and Fortify for quick start on you laravel backend project.
+Both session based and token based can be implemented via this repo.
 ## Features
 
 - login
