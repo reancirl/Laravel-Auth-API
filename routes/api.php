@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum',\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class])->get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum',EnsureFrontendRequestsAreStateful::class])->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware(['auth:sanctum',EnsureFrontendRequestsAreStateful::class])->post('/token/destroy', function (Request $request) {
+    $request->user()->currentAccessToken()->delete();
+
+    return response()->json([
+        'message' => 'Token deleted!'
+    ]);
 });
