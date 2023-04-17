@@ -14,15 +14,21 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::group(['middleware' => ['auth:sanctum']], function(){
 
-Route::middleware(['auth:sanctum',EnsureFrontendRequestsAreStateful::class])->get('/user', function (Request $request) {
-    return $request->user();
-});
+    Route::group(['middleware' => ['verified']], function(){
 
-Route::middleware(['auth:sanctum',EnsureFrontendRequestsAreStateful::class])->post('/token/destroy', function (Request $request) {
-    $request->user()->currentAccessToken()->delete();
+        Route::get('/user', function(Request $request) {
+            return $request->user();
+        });
+        
+    });
 
-    return response()->json([
-        'message' => 'Token deleted!'
-    ]);
+    Route::post('/token/destroy',function(Request $request) {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Token deleted!'
+        ]);
+    });
 });

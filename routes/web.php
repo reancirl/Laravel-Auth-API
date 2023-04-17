@@ -19,3 +19,9 @@ Route::get('/', function () {
         'message' => 'Logged in'
     ]);
 });
+
+Route::get('/api/reset-password/{token}', function($token){
+    return response()->json([
+        'token' => $token,
+    ]);
+})->name('password.reset');
